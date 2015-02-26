@@ -1,2 +1,7 @@
 -Transcribed all the data from the PDF we were given to CSV
 	-Data for 2010 was extrapolated manually, accurate to +-2 percentage points, or 10%, whichever is less for each region
+-Wrote basic HTML file with title to get us started
+-Wrote ~80 lines in js file to get us started, mostly from mike bostock's stacked area chart tutorial
+	-Testing fails, will troubleshoot later
+-Changed layout from src/ data/ to one merged directory www/
+
