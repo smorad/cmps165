@@ -1,4 +1,10 @@
 //some of the following code is from http://bl.ocks.org/mbostock/3885211
+
+//Define Margin
+var margin = {left: 80, right: 80, top: 50, bottom: 50 }, 
+	width = 960 - margin.left -margin.right,
+	height = 500 - margin.top - margin.bottom;
+
 var parseDate = d3.time.format("%y").parse,
     formatPercent = d3.format(".0%");
 
@@ -33,8 +39,9 @@ var svg = d3.select("body").append("svg")
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-d3.csv("immigration.csv", function(error, dataset) {
+d3.csv("immigration.csv", function(error, data) {
 	color.domain(d3.keys(data[0]).filter(function(key) { return key !== "year"; }));
+	console.log(data);
 
 	data.forEach(function(d) {
     	d.date = parseDate(d.date);
@@ -76,5 +83,8 @@ d3.csv("immigration.csv", function(error, dataset) {
       .attr("class", "y axis")
       .call(yAxis);
 });
+
+
+//add slider, could interpolate data and make more granular steps later
 
 
