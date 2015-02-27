@@ -43,7 +43,7 @@ var svg = d3.select("body").append("svg")
 //d3.slider().axis(true).min(1850).max(2010).step(5)
 
 d3.csv("immigration.csv", function(error, data) {
-	color.domain(d3.keys(data[0]).filter(function(key) { return key !== "date"; }));
+	color.domain(d3.keys(data[0]).filter(function(key) { return key !== "date" && key !== "Percent Foreign"; }));
 	console.log(data);
 
 	data.forEach(function(d) {
