@@ -5,7 +5,7 @@ var margin = {left: 80, right: 80, top: 50, bottom: 50 },
 	width = 960 - margin.left -margin.right,
 	height = 500 - margin.top - margin.bottom;
 
-var parseDate = d3.time.format("%y").parse,
+var parseDate = d3.time.format("%Y").parse,
     formatPercent = d3.format(".0%");
 
 var x = d3.time.scale()
