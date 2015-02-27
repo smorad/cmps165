@@ -26,7 +26,7 @@ var yAxis = d3.svg.axis()
     .tickFormat(formatPercent);
 
 var area = d3.svg.area()
-    .x(function(d) { return x(d.year); })
+    .x(function(d) { return x(d.date); })
     .y0(function(d) { return y(d.y0); })
     .y1(function(d) { return y(d.y0 + d.y); });
 
@@ -40,15 +40,15 @@ var svg = d3.select("body").append("svg")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 //add slider, could interpolate data and make more granular steps later
-d3.slider().axis(true).min(1850).max(2010).step(5)
+//d3.slider().axis(true).min(1850).max(2010).step(5)
 
 d3.csv("immigration.csv", function(error, data) {
-	color.domain(d3.keys(data[0]).filter(function(key) { return key !== "year"; }));
+	color.domain(d3.keys(data[0]).filter(function(key) { return key !== "date"; }));
 	console.log(data);
 
 	data.forEach(function(d) {
 		console.log(d);
-    	d.Year = parseDate(d.Year);
+    	d.date = parseDate(d.date);
   	});
 
   var regions = stack(color.domain().map(function(name) {
@@ -62,7 +62,7 @@ d3.csv("immigration.csv", function(error, data) {
   x.domain(d3.extent(data, function(d) { return d.date; }));
 
   var browser = svg.selectAll(".browser")
-      .data(browsers)
+      .data(regions)
     .enter().append("g")
       .attr("class", "browser");
 
@@ -87,7 +87,3 @@ d3.csv("immigration.csv", function(error, data) {
       .attr("class", "y axis")
       .call(yAxis);
 });
-
-
-
-
