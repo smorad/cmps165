@@ -39,12 +39,16 @@ var svg = d3.select("body").append("svg")
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+//add slider, could interpolate data and make more granular steps later
+d3.slider().axis(true).min(1850).max(2010).step(5)
+
 d3.csv("immigration.csv", function(error, data) {
 	color.domain(d3.keys(data[0]).filter(function(key) { return key !== "year"; }));
 	console.log(data);
 
 	data.forEach(function(d) {
-    	d.date = parseDate(d.date);
+		console.log(d);
+    	d.Year = parseDate(d.Year);
   	});
 
   var regions = stack(color.domain().map(function(name) {
@@ -85,6 +89,5 @@ d3.csv("immigration.csv", function(error, data) {
 });
 
 
-//add slider, could interpolate data and make more granular steps later
 
 
