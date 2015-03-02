@@ -3,7 +3,7 @@
 //Define Margin
 var margin = {left: 80, right: 80, top: 50, bottom: 50 }, 
 	width = 960 - margin.left -margin.right,
-	height = 500 - margin.top - margin.bottom;
+	height = 700 - margin.top - margin.bottom;
 
 var parseDate = d3.time.format("%Y").parse,
     formatPercent = d3.format(".0%");
@@ -12,6 +12,7 @@ var x = d3.time.scale()
     .range([0, width]);
 
 var y = d3.scale.linear()
+	.domain([0,0.4])
     .range([height, 0]);
 
 var color = d3.scale.category20();
@@ -42,8 +43,10 @@ var svg = d3.select("body").append("svg")
 //add slider, could interpolate data and make more granular steps later
 //d3.slider().axis(true).min(1850).max(2010).step(5)
 
+
 d3.csv("immigration.csv", function(error, data) {
-	color.domain(d3.keys(data[0]).filter(function(key) { return key !== "date" && key !== "Percent Foreign"; }));
+	color.domain(d3.keys(data[0]).filter(function(key) { 
+		return key !== "date" && key !== "Percent Foreign" && key !== "Natives"; }));
 	console.log(data);
 
 	data.forEach(function(d) {
@@ -87,3 +90,43 @@ d3.csv("immigration.csv", function(error, data) {
       .attr("class", "y axis")
       .call(yAxis);
 });
+
+//begin slider block
+var brush = d3.svg.brush()
+    .x(x)
+    .extent([0, 0])
+    .on("brush", brushed);
+
+var slider = svg.append("g")
+    .attr("class", "slider")
+    .call(brush);
+
+slider.selectAll(".extent,.resize")
+    .remove();
+
+slider.select(".background")
+    .attr("height", height);
+
+var handle = slider.append("circle")
+    .attr("class", "handle")
+    .attr("r", 9);
+
+slider
+    .call(brush.event)
+  .transition() // gratuitous intro!
+    .duration(750)
+    .call(brush.extent([70, 70]))
+    .call(brush.event);
+
+function brushed() {
+  var value = brush.extent()[0];
+
+  if (d3.event.sourceEvent) { // not a programmatic event
+    value = x.invert(d3.mouse(this)[0]);
+    brush.extent([value, value]);
+  }
+
+  handle.attr("cx", x(value));
+  //d3.select("body").style("background-color", d3.hsl(value, .8, .8));
+}
+//end slider block
