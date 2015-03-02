@@ -63,7 +63,7 @@ d3.csv("immigration.csv", function(error, data) {
     };
   }));
   x.domain(d3.extent(data, function(d) { return d.date; }));
-
+    
   var browser = svg.selectAll(".browser")
       .data(regions)
     .enter().append("g")
@@ -79,8 +79,23 @@ d3.csv("immigration.csv", function(error, data) {
       .attr("transform", function(d) { return "translate(" + x(d.value.date) + "," + y(d.value.y0 + d.value.y / 2) + ")"; })
       .attr("x", -6)
       .attr("dy", ".35em")
-      .text(function(d) { return d.name; });
-
+      //.text(function(d) { return d.name; });
+  
+  
+  browser.append('rect')
+    .attr('x', width - 20)
+    .attr('y', function(d, i){ return i *  20;})
+    .attr('width', 10)
+    .attr('height', 10)
+    .style('fill', function(d) { 
+      return color(d.name);
+    });
+  
+  browser.append('text')
+    .attr('x', width - 25)
+    .attr('y', function(d, i){ return (i *  20) + 9;})
+    .text(function(d){ return d.name; });  
+  
   svg.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + height + ")")
