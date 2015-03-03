@@ -25,9 +25,28 @@ body {
   float: left;
 }
 
+.chart1_div {
+	float:left;
+}
+
+.slider_div {
+	float:left;
+	clear:left;
+}
+
+.slider_div {
+  position:relative;
+  display:inline-block;
+}
+
 .halo {
   fill: none;
   stroke: #ddd;
   stroke-width: 8px;
   stroke-linecap: round;
 }
+
+.arc path {
+  stroke: #fff;
+}
+

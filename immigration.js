@@ -2,8 +2,8 @@
 
 //Define Margin
 var margin = {left: 80, right: 80, top: 50, bottom: 50 }, 
-	width = 960 - margin.left -margin.right,
-	height = 700 - margin.top - margin.bottom;
+	width = 760 - margin.left - margin.right,
+	height = 500 - margin.top - margin.bottom;
 
 var parseDate = d3.time.format("%Y").parse,
     formatPercent = d3.format(".0%");
@@ -36,7 +36,7 @@ var stack = d3.layout.stack()
 
 var pie = d3.layout.pie()
     .sort(null)
-    .value(function(d) { console.log(d.values); return d.values; });
+    .value(function(d) { console.log(d.date); return d.date; });
 
 var svg = d3.select("#chart1").append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -50,7 +50,13 @@ var svg2 = d3.select("#chart2").append("svg")
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + 0 + ")");
+
  
+var svg3 = d3.select("#chart3").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 d3.csv("immigration.csv", function(error, data) {
 	color.domain(d3.keys(data[0]).filter(function(key) { 
@@ -120,8 +126,8 @@ d3.csv("immigration.csv", function(error, data) {
     .innerRadius(0);
 
 
-	var g = svg2.selectAll(".arc")
-      .data(pie(data[0]))
+	var g = svg3.selectAll(".arc")
+      .data(pie(data))
     .enter().append("g")
       .attr("class", "arc");
 	
@@ -129,7 +135,7 @@ d3.csv("immigration.csv", function(error, data) {
 
   	g.append("path")
       .attr("d", arc)
-      .style("fill", function(d) { return color(1); });
+      .style("fill", function(d) { return color(d.name); });
 
 });
 
