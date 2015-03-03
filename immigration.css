@@ -1,5 +1,16 @@
 body {
-  font: 12px sans-serif;
+  background-color: #EFEFEF;
+  color: #000099;
+  font-family: Verdana, Helvetica, Arial, sans-serif;
+  font-size: 110%;
+}
+
+h1 {
+  text-align: center;
+  background-color: #CECECE;
+  border-top: 1px solid #000099;
+  border-bottom: 1px solid #000099;
+  padding: 10px;
 }
 
 .axis path,
@@ -22,20 +33,20 @@ body {
 }
 
 .wrapper {
-	white-space: nowrap;
+  white-space: nowrap;
 }
 
 .big_div {
-	white-space: nowrap;
+  white-space: nowrap;
 }
 
 .chart1_div {
-	float:left;
+  float:left;
 }
 
 .slider_div {
-	float:left;
-	clear:left;
+  float:left;
+  clear:left;
 }
 
 .slider_div {
