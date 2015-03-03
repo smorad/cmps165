@@ -65,7 +65,7 @@ var svg = d3.select("#chart1")
 var svg2 = d3.select("#chart2")
     .append("svg")
     .attr("width", width + margin.left / 2 + margin.right / 2 + 5)
-    .attr("height", height + margin.top + margin.bottom)
+    .attr("height", 100)
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + 0 + ")");
 
