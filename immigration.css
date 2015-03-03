@@ -21,8 +21,12 @@ body {
   cursor: crosshair;
 }
 
-.container {
-  float: left;
+.wrapper {
+	white-space: nowrap;
+}
+
+.big_div {
+	white-space: nowrap;
 }
 
 .chart1_div {
