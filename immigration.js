@@ -160,11 +160,24 @@ d3.csv("immigration.csv", function(error, data) {
     svg.append("g")
         .attr("class", "x axis")
         .attr("transform", "translate(0," + height + ")")
-        .call(xAxis);
+        .call(xAxis)
+        .append("text")
+        .attr("x", width / 2)
+        .attr("y", margin.bottom - 5)
+        .attr("dy", ".1em")
+        .style("text-anchor", "middle")
+        .text("1850-2010 (Every 10 Years)");
 
     svg.append("g")
         .attr("class", "y axis")
-        .call(yAxis);
+        .call(yAxis)
+        .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("x", -height/2)
+        .attr("y", -margin.bottom - 15)
+        .attr("dy", ".1em")
+        .style("text-anchor", "middle")
+        .text("Percentage of Foreigners");
 
     //pie chart
     var radius = height / 2;
