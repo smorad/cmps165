@@ -17,6 +17,17 @@ body {
   fill: #fff;
   stroke: #000;
   stroke-opacity: .5;
-  stroke-width: 1.25px;
+  stroke-width: 2.25px;
   cursor: crosshair;
+}
+
+.container {
+  float: left;
+}
+
+.halo {
+  fill: none;
+  stroke: #ddd;
+  stroke-width: 8px;
+  stroke-linecap: round;
 }

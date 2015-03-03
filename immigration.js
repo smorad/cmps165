@@ -34,15 +34,23 @@ var area = d3.svg.area()
 var stack = d3.layout.stack()
     .values(function(d) { return d.values; });
 
-var svg = d3.select("body").append("svg")
+var pie = d3.layout.pie()
+    .sort(null)
+    .value(function(d) { console.log(d.values); return d.values; });
+
+var svg = d3.select("#chart1").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-//add slider, could interpolate data and make more granular steps later
-//d3.slider().axis(true).min(1850).max(2010).step(5)
-
+//svg2 is for slider
+var svg2 = d3.select("#chart2").append("svg")
+    .attr("width", width + margin.left/2 + margin.right/2 + 5)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + 0 + ")");
+ 
 
 d3.csv("immigration.csv", function(error, data) {
 	color.domain(d3.keys(data[0]).filter(function(key) { 
@@ -104,15 +112,39 @@ d3.csv("immigration.csv", function(error, data) {
   svg.append("g")
       .attr("class", "y axis")
       .call(yAxis);
+
+	//pie chart
+	var radius = height / 2;
+	var arc = d3.svg.arc()
+    .outerRadius(radius - 10)
+    .innerRadius(0);
+
+
+	var g = svg2.selectAll(".arc")
+      .data(pie(data[0]))
+    .enter().append("g")
+      .attr("class", "arc");
+	
+	console.log(g);
+
+  	g.append("path")
+      .attr("d", arc)
+      .style("fill", function(d) { return color(1); });
+
 });
 
 //begin slider block
+var slider_x = d3.scale.linear()
+	.domain([1850, 2010])
+	.range([0, width])
+	.clamp(true);
+
 var brush = d3.svg.brush()
-    .x(x)
+    .x(slider_x)
     .extent([0, 0])
     .on("brush", brushed);
 
-var slider = svg.append("g")
+var slider = svg2.append("g")
     .attr("class", "slider")
     .call(brush);
 
@@ -124,6 +156,7 @@ slider.select(".background")
 
 var handle = slider.append("circle")
     .attr("class", "handle")
+	.attr("transform", "translate(0," + 10 + ")")
     .attr("r", 9);
 
 slider
