@@ -197,7 +197,7 @@ d3.csv("immigration.csv", function(error, data) {
     g.append("path")
         .attr("d", arc)
         .style("fill", function(d) {
-            return color(d.name);
+            return color(d.data.year);
         });
 
 });
