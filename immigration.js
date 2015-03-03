@@ -56,7 +56,7 @@ var svg3 = d3.select("#chart3").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
 d3.csv("immigration.csv", function(error, data) {
 	color.domain(d3.keys(data[0]).filter(function(key) { 
