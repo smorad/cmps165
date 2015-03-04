@@ -50,11 +50,10 @@ var stack = d3.layout.stack()
 var pie = d3.layout.pie()
     .sort(null)
     .value(function(d) {
-        console.log(d.year);
         return d.year;
     });
 
-var svg = d3.select("#chart1")
+var svg = d3.select("#chart1")  
     .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -65,7 +64,7 @@ var svg = d3.select("#chart1")
 var svg2 = d3.select("#chart2")
     .append("svg")
     .attr("width", width + margin.left / 2 + margin.right / 2 + 5)
-    .attr("height", 100)
+    .attr("height", 50)
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + 0 + ")");
 
@@ -84,9 +83,13 @@ d3.csv("immigration.csv", function(error, data) {
                 key !== "Natives";
         }));
     console.log(data);
+    
+    var tdata = data.filter(function(row) {
+        return row['year'] == '1850';
+    })
+    console.log(tdata);
 
     data.forEach(function(d) {
-        console.log(d);
         d.year = parseDate(d.year);
     });
 
@@ -106,6 +109,26 @@ d3.csv("immigration.csv", function(error, data) {
         return d.year;
     }));
 
+    //pie chart
+    var radius = height / 2;
+    var arc = d3.svg.arc()
+        .outerRadius(radius - 10)
+        .innerRadius(0);
+    
+    var g = svg3.selectAll(".arc")
+        .data(pie(data))
+        .enter()
+        .append("g")
+        .attr("class", "arc");
+
+    g.append("text")
+
+    g.append("path")
+        .attr("d", arc)
+        .style("fill", function(d) {
+            return color(d.data.year);
+        });
+    
     var browser = svg.selectAll(".browser")
         .data(regions)
         .enter()
@@ -179,26 +202,9 @@ d3.csv("immigration.csv", function(error, data) {
         .style("text-anchor", "middle")
         .text("Percentage of Foreigners");
 
-    //pie chart
-    var radius = height / 2;
-    var arc = d3.svg.arc()
-        .outerRadius(radius - 10)
-        .innerRadius(0);
-
-
-    var g = svg3.selectAll(".arc")
-        .data(pie(data))
-        .enter()
-        .append("g")
-        .attr("class", "arc");
-
-    console.log(g);
-
-    g.append("path")
-        .attr("d", arc)
-        .style("fill", function(d) {
-            return color(d.data.year);
-        });
+    var tdata = data.filter(function(row) {
+        return row['year'] == '1850';
+    })
 
 });
 
