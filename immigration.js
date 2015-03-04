@@ -202,6 +202,23 @@ d3.csv("immigration.csv", function(error, data) {
         .style("text-anchor", "middle")
         .text("Percentage of Foreigners");
 
+   var butthole = browser.append("rect")
+        .attr('fill', 'green')
+        .attr("transform", "translate(" + width/2 + "," + height/3 + ")")
+        .attr("width", 100)
+        .attr("height", 50);
+
+    browser.append("rect")
+        .attr('fill', 'green')
+        .attr("transform", "translate(" + width/2 + "," + height/3 + ")")
+        .attr("width", 5)
+        .attr("height", 100);    
+    
+    browser.append("text")
+        .attr('fill', 'white')
+        .attr("transform", "translate(" + 395 + "," + 163 + ")")
+        .text("Gold Rush");
+    
     var tdata = data.filter(function(row) {
         return row['year'] == '1850';
     })
