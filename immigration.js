@@ -47,10 +47,14 @@ var stack = d3.layout.stack()
         return d.values;
     });
 
+//global variable holding year to animate pie chart
+var slider_year = '1850';
+
 var pie = d3.layout.pie()
     .sort(null)
     .value(function(d) {
-        return d.year;
+		console.log(d['1850']);
+        return d[slider_year];
     });
 
 var svg = d3.select("#chart1")  
@@ -76,18 +80,13 @@ var svg3 = d3.select("#chart3")
     .append("g")
     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
+
 d3.csv("immigration.csv", function(error, data) {
     color.domain(d3.keys(data[0])
         .filter(function(key) {
             return key !== "year" && key !== "Percent Foreign" &&
                 key !== "Natives";
         }));
-    console.log(data);
-    
-    var tdata = data.filter(function(row) {
-        return row['year'] == '1850';
-    })
-    console.log(tdata);
 
     data.forEach(function(d) {
         d.year = parseDate(d.year);
@@ -109,25 +108,6 @@ d3.csv("immigration.csv", function(error, data) {
         return d.year;
     }));
 
-    //pie chart
-    var radius = height / 2;
-    var arc = d3.svg.arc()
-        .outerRadius(radius - 10)
-        .innerRadius(0);
-    
-    var g = svg3.selectAll(".arc")
-        .data(pie(data))
-        .enter()
-        .append("g")
-        .attr("class", "arc");
-
-    g.append("text")
-
-    g.append("path")
-        .attr("d", arc)
-        .style("fill", function(d) {
-            return color(d.data.year);
-        });
     
     var browser = svg.selectAll(".browser")
         .data(regions)
@@ -219,10 +199,29 @@ d3.csv("immigration.csv", function(error, data) {
         .attr("transform", "translate(" + 395 + "," + 163 + ")")
         .text("Gold Rush");
     
-    var tdata = data.filter(function(row) {
-        return row['year'] == '1850';
-    })
+});
 
+d3.csv("transposed_immigration.csv", function(error, data) {
+	console.log(data)
+    //pie chart
+    var radius = height / 2;
+    var arc = d3.svg.arc()
+        .outerRadius(radius - 10)
+        .innerRadius(0);
+    
+    var g = svg3.selectAll(".arc")
+        .data(pie(data))
+        .enter()
+        .append("g")
+        .attr("class", "arc");
+
+    g.append("text")
+
+    g.append("path")
+        .attr("d", arc)
+        .style("fill", function(d) {
+            return color(d.data.year);
+        });
 });
 
 //begin slider block
@@ -266,6 +265,11 @@ function brushed() {
         }
 
         handle.attr("cx", x(value));
+		console.log(value.getFullYear());
+		if(value.getFullYear() > 2010)
+			x = parseDate('2010');
+		else if(value.getFullYear() < 1850)
+			x = parseDate('1850');
         //d3.select("body").style("background-color", d3.hsl(value, .8, .8));
     }
     //end slider block
