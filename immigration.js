@@ -210,7 +210,7 @@ function draw_pie(){
 		//pie chart
 		var radius = height / 2;
 		var arc = d3.svg.arc()
-			.outerRadius(radius - 10)
+			.outerRadius(radius)
 			.innerRadius(0);
 		
 		var g = svg3.selectAll(".arc")
