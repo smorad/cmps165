@@ -223,6 +223,7 @@ function draw_pie(){
 
 		g.append("path")
 			.attr("d", arc)
+			.each(function(d) { this._current = d; })
 			.style("fill", function(d) {
 				return color(d.data.region);
 			});
@@ -293,8 +294,11 @@ function brushed() {
 			console.log(value);
 			for (prop in value)
 				console.log(prop);
-			slider_year = get_nearest_date(value);
-		draw_pie();
+			tmp = get_nearest_date(value);
+			if(tmp !== slider_year){
+				slider_year = get_nearest_date(value);
+				draw_pie();
+			}
         //d3.select("body").style("background-color", d3.hsl(value, .8, .8));
     }
     //end slider block
