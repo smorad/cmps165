@@ -207,7 +207,6 @@ function draw_pie(){
     });
 
 	d3.csv("transposed_immigration.csv", function(error, data) {
-		console.log(data)
 		//pie chart
 		var radius = height / 2;
 		var arc = d3.svg.arc()
@@ -262,6 +261,26 @@ slider.call(brush.event)
     .call(brush.extent([70, 70]))
     .call(brush.event);
 
+
+function get_nearest_date(string){
+	//Why JS and d3 wouldn't use the same date format is beyond me
+	//So let's convert a date string into millis back into a js Date type...
+	var js_date = Date.parse(string);
+	var years = 1000 * 60 * 60 * 24 * 365;
+	var rounded_time = Math.round(js_date / years);
+	//time is relative to epoch, let's change that
+	rounded_time += 1970
+	//drop the ones place
+	rounded_time = Math.round(rounded_time / 10) * 10
+	if(rounded_time > 2010)
+		rounded_time = 2010
+	else if(rounded_time < 1850)
+		rounded_time = 1850
+	console.log('rounded time: ' + rounded_time);
+	return rounded_time;
+
+}
+
 function brushed() {
         var value = brush.extent()[0];
 
@@ -271,13 +290,10 @@ function brushed() {
         }
 
         handle.attr("cx", x(value));
-		console.log(value);
-		if(value.getFullYear() > 2010)
-			slider_year = '2010';
-		else if(value.getFullYear() < 1850)
-			slider_year = '1850';
-		slider_year = parseInt(slider_year) + 10;
-		slider_year = slider_year.toString();
+			console.log(value);
+			for (prop in value)
+				console.log(prop);
+			slider_year = get_nearest_date(value);
 		draw_pie();
         //d3.select("body").style("background-color", d3.hsl(value, .8, .8));
     }
