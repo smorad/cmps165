@@ -50,13 +50,6 @@ var stack = d3.layout.stack()
 //global variable holding year to animate pie chart
 var slider_year = '1850';
 
-var pie = d3.layout.pie()
-    .sort(null)
-    .value(function(d) {
-		console.log(d['1850']);
-        return d[slider_year];
-    });
-
 var svg = d3.select("#chart1")  
     .append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -201,28 +194,41 @@ d3.csv("immigration.csv", function(error, data) {
     
 });
 
-d3.csv("transposed_immigration.csv", function(error, data) {
-	console.log(data)
-    //pie chart
-    var radius = height / 2;
-    var arc = d3.svg.arc()
-        .outerRadius(radius - 10)
-        .innerRadius(0);
-    
-    var g = svg3.selectAll(".arc")
-        .data(pie(data))
-        .enter()
-        .append("g")
-        .attr("class", "arc");
+function draw_pie(){
+	//clear image so we can redraw
+	//http://stackoverflow.com/questions/10784018/how-can-i-remove-or-replace-svg-content
+	svg3.selectAll("*").remove();		
 
-    g.append("text")
+	console.log(slider_year);
+	var pie = d3.layout.pie()
+    .sort(null)
+    .value(function(d) {
+        return d[slider_year];
+    });
 
-    g.append("path")
-        .attr("d", arc)
-        .style("fill", function(d) {
-            return color(d.data.region);
-        });
-});
+	d3.csv("transposed_immigration.csv", function(error, data) {
+		console.log(data)
+		//pie chart
+		var radius = height / 2;
+		var arc = d3.svg.arc()
+			.outerRadius(radius - 10)
+			.innerRadius(0);
+		
+		var g = svg3.selectAll(".arc")
+			.data(pie(data))
+			.enter()
+			.append("g")
+			.attr("class", "arc");
+
+		g.append("text")
+
+		g.append("path")
+			.attr("d", arc)
+			.style("fill", function(d) {
+				return color(d.data.region);
+			});
+	});
+}
 
 //begin slider block
 var slider_x = d3.scale.linear()
@@ -265,11 +271,14 @@ function brushed() {
         }
 
         handle.attr("cx", x(value));
-		console.log(value.getFullYear());
+		console.log(value);
 		if(value.getFullYear() > 2010)
 			slider_year = '2010';
 		else if(value.getFullYear() < 1850)
 			slider_year = '1850';
+		slider_year = parseInt(slider_year) + 10;
+		slider_year = slider_year.toString();
+		draw_pie();
         //d3.select("body").style("background-color", d3.hsl(value, .8, .8));
     }
     //end slider block
