@@ -220,7 +220,7 @@ d3.csv("transposed_immigration.csv", function(error, data) {
     g.append("path")
         .attr("d", arc)
         .style("fill", function(d) {
-            return color(d.data.year);
+            return color(d.data.region);
         });
 });
 
@@ -267,9 +267,9 @@ function brushed() {
         handle.attr("cx", x(value));
 		console.log(value.getFullYear());
 		if(value.getFullYear() > 2010)
-			x = parseDate('2010');
+			slider_year = '2010';
 		else if(value.getFullYear() < 1850)
-			x = parseDate('1850');
+			slider_year = '1850';
         //d3.select("body").style("background-color", d3.hsl(value, .8, .8));
     }
     //end slider block
