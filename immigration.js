@@ -197,7 +197,7 @@ d3.csv("immigration.csv", function(error, data) {
 			.text('1930: The Great Depression causes downturn in immigration');
 			
 		browser.append("circle")
-			.attr('fill', color('China, Philipenes, Vietnam'))
+			.attr('fill', color('China, Phillipines, Vietnam'))
 			.attr("transform", "translate(" + x(new Date('1859')) + "," + 0 + ")")
 			.attr("r", 5)
 			.append("svg:title")
