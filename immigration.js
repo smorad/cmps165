@@ -255,7 +255,7 @@ d3.csv("immigration.csv", function(error, data) {
 
 		browser.append("circle")
 			.attr('fill', color('Asia'))
-			.attr("transform", "translate(" + x(new Date('1978')) + "," + 0 + ")")
+			.attr("transform", "translate(" + x(new Date('1979')) + "," + 0 + ")")
 			.attr("r", 5)
 			.append("svg:title")
 			.text('1978-1979: Iranian revolution sparks mass exodus');
