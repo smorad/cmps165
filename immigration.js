@@ -331,6 +331,19 @@ var brush = d3.svg.brush()
     .extent([0, 0])
     .on("brush", brushed);
 
+svg2.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + 10 + ")")
+    .call(d3.svg.axis()
+      .scale(x)
+      .orient("bottom")
+      .tickFormat(function(d) { return ''; })
+      .tickSize(0)
+      .tickPadding(12))
+  .select(".domain")
+  .select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
+    .attr("class", "halo");
+
 var slider = svg2.append("g")
     .attr("class", "slider")
     .call(brush);
