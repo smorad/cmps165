@@ -1,0 +1,2 @@
+-Created static annotation box on line graph
+-Created labels on pie chart
