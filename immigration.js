@@ -183,23 +183,74 @@ d3.csv("immigration.csv", function(error, data) {
         .style("text-anchor", "middle")
         .text("Percentage of Foreigners");
 
-   browser.append("rect")
-        .attr('fill', 'green')
-        .attr("transform", "translate(" + width/2 + "," + height/3 + ")")
-        .attr("width", 100)
-        .attr("height", 50);
+		//tooltips
+//		var paths = svg.selectAll("path");
+//		var l = path.getTotalLength();
+//		function get_yval(x){
+//			return path.getPointAtLength(x * l);
+//		}
+		browser.append("circle")
+			.attr('fill', 'black')
+			.attr("transform", "translate(" + x(new Date('1930')) + "," + 0 + ")")
+			.attr("r", 5)
+			.append("svg:title")
+			.text('1930: The Great Depression causes downturn in immigration');
+			
+		browser.append("circle")
+			.attr('fill', color('China, Philipenes, Vietnam'))
+			.attr("transform", "translate(" + x(new Date('1859')) + "," + 0 + ")")
+			.attr("r", 5)
+			.append("svg:title")
+			.text('1859: California passes law that bans all immigration from China');
 
-    browser.append("rect")
-        .attr('fill', 'green')
-        .attr("transform", "translate(" + width/2 + "," + height/3 + ")")
-        .attr("width", 5)
-        .attr("height", 100);    
-    
-    browser.append("text")
-        .attr('fill', 'white')
-        .attr("transform", "translate(" + 395 + "," + 163 + ")")
-        .text("Gold Rush");
-    
+		browser.append("circle")
+			.attr('fill', color('Europe'))
+			.attr("transform", "translate(" + x(new Date('1855')) + "," + 0 + ")")
+			.attr("r", 5)
+			.append("svg:title")
+			.text('1840-1860: Irish potato famine, many flee Ireland');
+			
+		browser.append("circle")
+			.attr('fill', 'black')
+			.attr("transform", "translate(" + x(new Date('1965')) + "," + 0 + ")")
+			.attr("r", 5)
+			.append("svg:title")
+			.text('1965: Immigration Nationality Act allows visas based on skill and family');
+
+		browser.append("circle")
+			.attr('fill', color('Latin America'))
+			.attr("transform", "translate(" + x(new Date('1970')) + "," + 0 + ")")
+			.attr("r", 5)
+			.append("svg:title")
+			.text('1970-1973: US sponsored coup in Chile');
+
+		browser.append("circle")
+			.attr('fill', color('Latin America'))
+			.attr("transform", "translate(" + x(new Date('1976')) + "," + 0 + ")")
+			.attr("r", 5)
+			.append("svg:title")
+			.text('1976: US sponsored coup in Argentina');
+
+		browser.append("circle")
+			.attr('fill', color('Mexico'))
+			.attr("transform", "translate(" + x(new Date('1977')) + "," + 0 + ")")
+			.attr("r", 5)
+			.append("svg:title")
+			.text('1976: First Mexican peso crisis');
+
+		browser.append("circle")
+			.attr('fill', color('Latin America'))
+			.attr("transform", "translate(" + x(new Date('1981')) + "," + 0 + ")")
+			.attr("r", 5)
+			.append("svg:title")
+			.text('1981-1990: US sponsored coup in Nicaragua (Iran-Contra)');
+
+		browser.append("circle")
+			.attr('fill', color('Mexico'))
+			.attr("transform", "translate(" + x(new Date('1994')) + "," + 0 + ")")
+			.attr("r", 5)
+			.append("svg:title")
+			.text('1994: NAFTA passes, Mexican goods production declines');
 });
 
 function draw_pie(){
@@ -207,7 +258,6 @@ function draw_pie(){
 	//http://stackoverflow.com/questions/10784018/how-can-i-remove-or-replace-svg-content
 	svg3.selectAll("*").remove();		
 
-	console.log(slider_year);
 	var pie = d3.layout.pie()
     .sort(null)
     .value(function(d) {
@@ -288,7 +338,6 @@ function get_nearest_date(string){
 		rounded_time = 2010
 	else if(rounded_time < 1850)
 		rounded_time = 1850
-	console.log('rounded time: ' + rounded_time);
 	return rounded_time;
 
 }
@@ -302,9 +351,6 @@ function brushed() {
         }
 
         handle.attr("cx", x(value));
-			console.log(value);
-			for (prop in value)
-				console.log(prop);
 			tmp = get_nearest_date(value);
 			if(tmp !== slider_year){
 				slider_year = get_nearest_date(value);
