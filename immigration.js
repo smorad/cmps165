@@ -40,7 +40,8 @@ var area = d3.svg.area()
     })
     .y1(function(d) {
         return y(d.y0 + d.y);
-    });
+    })
+	.interpolate('basis');
 
 var stack = d3.layout.stack()
     .values(function(d) {
