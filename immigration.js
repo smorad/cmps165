@@ -50,6 +50,13 @@ var stack = d3.layout.stack()
 //global variable holding year to animate pie chart
 var slider_year = '1850';
 
+var tip = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([0, 0])
+  .html(function(d) {
+    return d.data.region + ": <span style='color:orangered'>" + d.data[slider_year] +"%" + "</span>";
+  });
+
 var svg = d3.select("#chart1")  
     .append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -73,6 +80,7 @@ var svg3 = d3.select("#chart3")
     .append("g")
     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
+svg3.call(tip);
 
 d3.csv("immigration.csv", function(error, data) {
     color.domain(d3.keys(data[0])
@@ -175,7 +183,7 @@ d3.csv("immigration.csv", function(error, data) {
         .style("text-anchor", "middle")
         .text("Percentage of Foreigners");
 
-   var butthole = browser.append("rect")
+   browser.append("rect")
         .attr('fill', 'green')
         .attr("transform", "translate(" + width/2 + "," + height/3 + ")")
         .attr("width", 100)
@@ -222,11 +230,14 @@ function draw_pie(){
 		g.append("text")
 
 		g.append("path")
+            .attr("class", "arc")
 			.attr("d", arc)
 			.each(function(d) { this._current = d; })
 			.style("fill", function(d) {
 				return color(d.data.region);
-			});
+			})
+            .on('mouseover', tip.show)
+            .on('mouseout', tip.hide);
 	});
 }
 
