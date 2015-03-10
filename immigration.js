@@ -210,6 +210,27 @@ d3.csv("immigration.csv", function(error, data) {
 			.attr("r", 5)
 			.append("svg:title")
 			.text('1840-1860: Irish potato famine, many flee Ireland');
+
+		browser.append("circle")
+			.attr('fill', color('China, Phillipines, Vietnam'))
+			.attr("transform", "translate(" + x(new Date('1859')) + "," + 0 + ")")
+			.attr("r", 5)
+			.append("svg:title")
+			.text('1882: Chinese Exclusion Act bans all immigration from China into California');
+
+		browser.append("circle")
+			.attr('fill', color('Mexico'))
+			.attr("transform", "translate(" + x(new Date('1910')) + "," + 0 + ")")
+			.attr("r", 5)
+			.append("svg:title")
+			.text('1910-1917: Mexican revolution causes refugees to flee to the US');
+
+		browser.append("circle")
+			.attr('fill', color('China, Phillipines, Vietnam'))
+			.attr("transform", "translate(" + x(new Date('1943')) + "," + 0 + ")")
+			.attr("r", 5)
+			.append("svg:title")
+			.text('1943: US and China ally against Japan during WWII, Chinese Exclusion Act repealed');
 			
 		browser.append("circle")
 			.attr('fill', 'black')
@@ -231,6 +252,13 @@ d3.csv("immigration.csv", function(error, data) {
 			.attr("r", 5)
 			.append("svg:title")
 			.text('1976: US sponsored coup in Argentina');
+
+		browser.append("circle")
+			.attr('fill', color('Asia'))
+			.attr("transform", "translate(" + x(new Date('1978')) + "," + 0 + ")")
+			.attr("r", 5)
+			.append("svg:title")
+			.text('1978-1979: Iranian revolution sparks mass exodus');
 
 		browser.append("circle")
 			.attr('fill', color('Mexico'))
