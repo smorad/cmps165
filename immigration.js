@@ -14,7 +14,8 @@ var parseDate = d3.time.format("%Y").parse,
     formatPercent = d3.format(".0%");
 
 var x = d3.time.scale()
-    .range([0, width]);
+    .range([0, width])
+	.clamp(true);
 
 var y = d3.scale.linear()
     .domain([0, 0.4])
@@ -68,7 +69,7 @@ var svg = d3.select("#chart1")
 //svg2 is for slider
 var svg2 = d3.select("#chart2")
     .append("svg")
-    .attr("width", width + margin.left / 2 + margin.right / 2 + 5)
+    .attr("width", width + margin.left + margin.right)
     .attr("height", 50)
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + 0 + ")");
@@ -334,7 +335,7 @@ svg2.append("g")
     .attr("class", "x axis")
     .attr("transform", "translate(0," + 10 + ")")
     .call(d3.svg.axis()
-      .scale(x)
+      .scale(slider_x)
       .orient("bottom")
       .tickFormat(function(d) { return ''; })
       .tickSize(0)
