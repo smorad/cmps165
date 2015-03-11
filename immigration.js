@@ -170,8 +170,7 @@ d3.csv("immigration.csv", function(error, data) {
         .attr("x", width / 2)
         .attr("y", margin.bottom - 5)
         .attr("dy", ".1em")
-        .style("text-anchor", "middle")
-        .text("1850-2010 (Every 10 Years)");
+        .style("text-anchor", "middle");
 
     svg.append("g")
         .attr("class", "y axis")
@@ -182,7 +181,7 @@ d3.csv("immigration.csv", function(error, data) {
         .attr("y", -margin.bottom - 15)
         .attr("dy", ".1em")
         .style("text-anchor", "middle")
-        .text("Percentage of Foreigners");
+        .text("Percentage of Immigrants");
 
 		//tooltips
 //		var paths = svg.selectAll("path");
