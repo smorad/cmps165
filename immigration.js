@@ -191,91 +191,91 @@ d3.csv("immigration.csv", function(error, data) {
 //		}
 		browser.append("circle")
 			.attr('fill', 'black')
-			.attr("transform", "translate(" + x(new Date('1930')) + "," + 0 + ")")
+			.attr("cx",  x(new Date('1930')) )
 			.attr("r", 5)
 			.append("svg:title")
 			.text('1930: The Great Depression causes downturn in immigration');
 			
 		browser.append("circle")
 			.attr('fill', color('Eastern Asia'))
-			.attr("transform", "translate(" + x(new Date('1859')) + "," + 0 + ")")
+			.attr("cx",  x(new Date('1859')) )
 			.attr("r", 5)
 			.append("svg:title")
 			.text('1859: California passes law that bans all immigration from China');
 
 		browser.append("circle")
 			.attr('fill', color('Europe'))
-			.attr("transform", "translate(" + x(new Date('1855')) + "," + 0 + ")")
+			.attr("cx",  x(new Date('1855')) )
 			.attr("r", 5)
 			.append("svg:title")
 			.text('1840-1860: Irish potato famine, many flee Ireland');
 
 		browser.append("circle")
 			.attr('fill', color('Eastern Asia'))
-			.attr("transform", "translate(" + x(new Date('1859')) + "," + 0 + ")")
+			.attr("cx",  x(new Date('1859')) )
 			.attr("r", 5)
 			.append("svg:title")
 			.text('1882: Chinese Exclusion Act bans all immigration from China into California');
 
 		browser.append("circle")
 			.attr('fill', color('Mexico'))
-			.attr("transform", "translate(" + x(new Date('1910')) + "," + 0 + ")")
+			.attr("cx",  x(new Date('1910')) )
 			.attr("r", 5)
 			.append("svg:title")
 			.text('1910-1917: Mexican revolution causes refugees to flee to the US');
 
 		browser.append("circle")
 			.attr('fill', color('Eastern Asia'))
-			.attr("transform", "translate(" + x(new Date('1943')) + "," + 0 + ")")
+			.attr("cx",  x(new Date('1943')) )
 			.attr("r", 5)
 			.append("svg:title")
 			.text('1943: US and China ally against Japan during WWII, Chinese Exclusion Act repealed');
 			
 		browser.append("circle")
 			.attr('fill', 'black')
-			.attr("transform", "translate(" + x(new Date('1965')) + "," + 0 + ")")
+			.attr("cx",  x(new Date('1965')) )
 			.attr("r", 5)
 			.append("svg:title")
 			.text('1965: Immigration Nationality Act allows visas based on skill and family');
 
 		browser.append("circle")
 			.attr('fill', color('Latin America'))
-			.attr("transform", "translate(" + x(new Date('1970')) + "," + 0 + ")")
+			.attr("cx",  x(new Date('1970')) )
 			.attr("r", 5)
 			.append("svg:title")
 			.text('1970-1973: US sponsored coup in Chile');
 
 		browser.append("circle")
 			.attr('fill', color('Latin America'))
-			.attr("transform", "translate(" + x(new Date('1976')) + "," + 0 + ")")
+			.attr("cx",  x(new Date('1976')) )
 			.attr("r", 5)
 			.append("svg:title")
 			.text('1976: US sponsored coup in Argentina');
 
 		browser.append("circle")
 			.attr('fill', color('Western Asia'))
-			.attr("transform", "translate(" + x(new Date('1979')) + "," + 0 + ")")
+			.attr("cx",  x(new Date('1979')) )
 			.attr("r", 5)
 			.append("svg:title")
 			.text('1978-1979: Iranian revolution sparks mass exodus');
 
 		browser.append("circle")
 			.attr('fill', color('Mexico'))
-			.attr("transform", "translate(" + x(new Date('1977')) + "," + 0 + ")")
+			.attr("cx",  x(new Date('1977')) )
 			.attr("r", 5)
 			.append("svg:title")
 			.text('1976: First Mexican peso crisis');
 
 		browser.append("circle")
 			.attr('fill', color('Latin America'))
-			.attr("transform", "translate(" + x(new Date('1981')) + "," + 0 + ")")
+			.attr("cx",  x(new Date('1981')) )
 			.attr("r", 5)
 			.append("svg:title")
 			.text('1981-1990: US sponsored coup in Nicaragua (Iran-Contra)');
 
 		browser.append("circle")
 			.attr('fill', color('Mexico'))
-			.attr("transform", "translate(" + x(new Date('1994')) + "," + 0 + ")")
+			.attr("cx",  x(new Date('1994')) )
 			.attr("r", 5)
 			.append("svg:title")
 			.text('1994: NAFTA passes, Mexican goods production declines');
