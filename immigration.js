@@ -61,7 +61,7 @@ var tip = d3.tip()
 
 var svg = d3.select("#chart1")  
     .append("svg")
-    .attr("width", width + margin.left + margin.right)
+    .attr("width", width + margin.left + margin.right + 200)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -80,7 +80,7 @@ var svg3 = d3.select("#chart3")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
-    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+    .attr("transform", "translate(" + width / 3 + "," + height / 2 + ")");
 
 svg3.call(tip);
 
@@ -143,21 +143,20 @@ d3.csv("immigration.csv", function(error, data) {
         //.text(function(d) { return d.name; });
 
 
-    browser.append('rect')
-        .attr('x', width - 20)
-        .attr('y', function(d, i) {
-            return i * 20;
+    browser.append('circle')
+        .attr('cx', width + 205)
+        .attr('cy', function(d, i) {
+            return height -i * 20;
         })
-        .attr('width', 10)
-        .attr('height', 10)
+        .attr('r', 5)
         .style('fill', function(d) {
             return color(d.name);
         });
 
     browser.append('text')
-        .attr('x', width - 25)
+        .attr('x', width + 195)
         .attr('y', function(d, i) {
-            return (i * 20) + 9;
+            return height - (i * 20) + 6;
         })
         .text(function(d) {
             return d.name;
@@ -198,7 +197,7 @@ d3.csv("immigration.csv", function(error, data) {
 			.text('1930: The Great Depression causes downturn in immigration');
 			
 		browser.append("circle")
-			.attr('fill', color('China, Phillipines, Vietnam'))
+			.attr('fill', color('Eastern Asia'))
 			.attr("transform", "translate(" + x(new Date('1859')) + "," + 0 + ")")
 			.attr("r", 5)
 			.append("svg:title")
@@ -212,7 +211,7 @@ d3.csv("immigration.csv", function(error, data) {
 			.text('1840-1860: Irish potato famine, many flee Ireland');
 
 		browser.append("circle")
-			.attr('fill', color('China, Phillipines, Vietnam'))
+			.attr('fill', color('Eastern Asia'))
 			.attr("transform", "translate(" + x(new Date('1859')) + "," + 0 + ")")
 			.attr("r", 5)
 			.append("svg:title")
@@ -226,7 +225,7 @@ d3.csv("immigration.csv", function(error, data) {
 			.text('1910-1917: Mexican revolution causes refugees to flee to the US');
 
 		browser.append("circle")
-			.attr('fill', color('China, Phillipines, Vietnam'))
+			.attr('fill', color('Eastern Asia'))
 			.attr("transform", "translate(" + x(new Date('1943')) + "," + 0 + ")")
 			.attr("r", 5)
 			.append("svg:title")
@@ -254,7 +253,7 @@ d3.csv("immigration.csv", function(error, data) {
 			.text('1976: US sponsored coup in Argentina');
 
 		browser.append("circle")
-			.attr('fill', color('Asia'))
+			.attr('fill', color('Western Asia'))
 			.attr("transform", "translate(" + x(new Date('1979')) + "," + 0 + ")")
 			.attr("r", 5)
 			.append("svg:title")
