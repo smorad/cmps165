@@ -299,22 +299,22 @@ function draw_pie(){
 		var arc = d3.svg.arc()
 			.outerRadius(radius)
 			.innerRadius(0);
+
+        function tweenPie(b) {
+          b.innerRadius = 0;
+          var i = d3.interpolate({startAngle: 0, endAngle: 0}, b);
+          return function(t) { return arc(i(t)); };
+        }
 		
 		var g = svg3.selectAll(".arc")
 			.data(pie(data))
 			.enter()
 			.append("g")
-			.attr("class", "arc");
+            .attr("class", "arc");
 
 		g.append("text");
 
 		g.append("path")
-            .attr("class", "arc")
-			.attr("d", arc)
-			.each(function(d) { this._current = d; })
-			.style("fill", function(d) {
-				return color(d.data.region);
-			})
             .on('mouseover', function(d) { 
                 tip.show(d);
                 d3.select(this)
@@ -323,15 +323,12 @@ function draw_pie(){
                 tip.hide(d);
                 d3.select(this)
                     .style("opacity", 1
-                          )});
-            /*.on("mouseover", function(d) {
-                d3.select(this).attr("r", 10).style("fill", "white");
-            })                  
-            .on("mouseout", function(d) {
-                d3.select(this).attr("r", 5.5).style("fill", function(d) {
-				return color(d.data.region);
-			});
-            });*/
+                          )})
+            .attr("fill", function(d) { return color(d.data.region); })
+            .transition()
+            .ease("spring")
+            .duration(1000)
+            .attrTween("d", tweenPie);
 	});
 }
 
@@ -415,3 +412,4 @@ function brushed() {
         //d3.select("body").style("background-color", d3.hsl(value, .8, .8));
     }
     //end slider block
+
