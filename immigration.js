@@ -10,12 +10,13 @@ var margin = {
     width = 760 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
-var parseDate = d3.time.format("%Y").parse,
+var parseDate = d3.time.format("%Y")
+    .parse,
     formatPercent = d3.format(".0%");
 
 var x = d3.time.scale()
     .range([0, width])
-	.clamp(true);
+    .clamp(true);
 
 var y = d3.scale.linear()
     .domain([0, 0.4])
@@ -42,7 +43,7 @@ var area = d3.svg.area()
     .y1(function(d) {
         return y(d.y0 + d.y);
     })
-	.interpolate('basis');
+    .interpolate('basis');
 
 var stack = d3.layout.stack()
     .values(function(d) {
@@ -52,7 +53,7 @@ var stack = d3.layout.stack()
 //global variable holding year to animate pie chart
 var slider_year = '1850';
 
-var svg = d3.select("#chart1")  
+var svg = d3.select("#chart1")
     .append("svg")
     .attr("width", width + margin.left + margin.right + 200)
     .attr("height", height + margin.top + margin.bottom)
@@ -104,7 +105,7 @@ d3.csv("immigration.csv", function(error, data) {
         return d.year;
     }));
 
-    
+
     var browser = svg.selectAll(".browser")
         .data(regions)
         .enter()
@@ -139,7 +140,7 @@ d3.csv("immigration.csv", function(error, data) {
     browser.append('circle')
         .attr('cx', width + 205)
         .attr('cy', function(d, i) {
-            return height -i * 20;
+            return height - i * 20;
         })
         .attr('r', 5)
         .style('fill', function(d) {
@@ -170,166 +171,203 @@ d3.csv("immigration.csv", function(error, data) {
         .call(yAxis)
         .append("text")
         .attr("transform", "rotate(-90)")
-        .attr("x", -height/2)
+        .attr("x", -height / 2)
         .attr("y", -margin.bottom - 15)
         .attr("dy", ".1em")
         .style("text-anchor", "middle")
         .text("Percentage of Immigrants");
 
-		//tooltips
-//		var paths = svg.selectAll("path");
-//		var l = path.getTotalLength();
-//		function get_yval(x){
-//			return path.getPointAtLength(x * l);
-//		}
-		browser.append("circle")
-			.attr('fill', 'black')
-			.attr("transform", "translate(" + x(new Date('1930')) + "," + 0 + ")")
-			.attr("r", 5)
-			.append("svg:title")
-			.text('1930: The Great Depression causes downturn in immigration');
-			
-		browser.append("circle")
-			.attr('fill', color('Eastern Asia'))
-			.attr("transform", "translate(" + x(new Date('1859')) + "," + 0 + ")")
-			.attr("r", 5)
-			.append("svg:title")
-			.text('1859: California passes law that bans all immigration from China');
+    //tooltips
+    //		var paths = svg.selectAll("path");
+    //		var l = path.getTotalLength();
+    //		function get_yval(x){
+    //			return path.getPointAtLength(x * l);
+    //		}
+    browser.append("circle")
+        .attr('fill', 'black')
+        .attr("transform", "translate(" + x(new Date('1930')) + "," + 0 +
+            ")")
+        .attr("r", 5)
+        .append("svg:title")
+        .text(
+            '1930: The Great Depression causes downturn in immigration'
+        );
 
-		browser.append("circle")
-			.attr('fill', color('Europe'))
-			.attr("transform", "translate(" + x(new Date('1855')) + "," + 0 + ")")
-			.attr("r", 5)
-			.append("svg:title")
-			.text('1840-1860: Irish potato famine, many flee Ireland');
+    browser.append("circle")
+        .attr('fill', color('Eastern Asia'))
+        .attr("transform", "translate(" + x(new Date('1859')) + "," + 0 +
+            ")")
+        .attr("r", 5)
+        .append("svg:title")
+        .text(
+            '1859: California passes law that bans all immigration from China'
+        );
 
-		browser.append("circle")
-			.attr('fill', color('Eastern Asia'))
-			.attr("transform", "translate(" + x(new Date('1859')) + "," + 0 + ")")
-			.attr("r", 5)
-			.append("svg:title")
-			.text('1882: Chinese Exclusion Act bans all immigration from China into California');
+    browser.append("circle")
+        .attr('fill', color('Europe'))
+        .attr("transform", "translate(" + x(new Date('1855')) + "," + 0 +
+            ")")
+        .attr("r", 5)
+        .append("svg:title")
+        .text('1840-1860: Irish potato famine, many flee Ireland');
 
-		browser.append("circle")
-			.attr('fill', color('Mexico'))
-			.attr("transform", "translate(" + x(new Date('1910')) + "," + 0 + ")")
-			.attr("r", 5)
-			.append("svg:title")
-			.text('1910-1917: Mexican revolution causes refugees to flee to the US');
+    browser.append("circle")
+        .attr('fill', color('Eastern Asia'))
+        .attr("transform", "translate(" + x(new Date('1859')) + "," + 0 +
+            ")")
+        .attr("r", 5)
+        .append("svg:title")
+        .text(
+            '1882: Chinese Exclusion Act bans all immigration from China into California'
+        );
 
-		browser.append("circle")
-			.attr('fill', color('Eastern Asia'))
-			.attr("transform", "translate(" + x(new Date('1943')) + "," + 0 + ")")
-			.attr("r", 5)
-			.append("svg:title")
-			.text('1943: US and China ally against Japan during WWII, Chinese Exclusion Act repealed');
-			
-		browser.append("circle")
-			.attr('fill', 'black')
-			.attr("transform", "translate(" + x(new Date('1965')) + "," + 0 + ")")
-			.attr("r", 5)
-			.append("svg:title")
-			.text('1965: Immigration Nationality Act allows visas based on skill and family');
+    browser.append("circle")
+        .attr('fill', color('Mexico'))
+        .attr("transform", "translate(" + x(new Date('1910')) + "," + 0 +
+            ")")
+        .attr("r", 5)
+        .append("svg:title")
+        .text(
+            '1910-1917: Mexican revolution causes refugees to flee to the US'
+        );
 
-		browser.append("circle")
-			.attr('fill', color('Latin America'))
-			.attr("transform", "translate(" + x(new Date('1970')) + "," + 0 + ")")
-			.attr("r", 5)
-			.append("svg:title")
-			.text('1970-1973: US sponsored coup in Chile');
+    browser.append("circle")
+        .attr('fill', color('Eastern Asia'))
+        .attr("transform", "translate(" + x(new Date('1943')) + "," + 0 +
+            ")")
+        .attr("r", 5)
+        .append("svg:title")
+        .text(
+            '1943: US and China ally against Japan during WWII, Chinese Exclusion Act repealed'
+        );
 
-		browser.append("circle")
-			.attr('fill', color('Latin America'))
-			.attr("transform", "translate(" + x(new Date('1976')) + "," + 0 + ")")
-			.attr("r", 5)
-			.append("svg:title")
-			.text('1976: US sponsored coup in Argentina');
+    browser.append("circle")
+        .attr('fill', 'black')
+        .attr("transform", "translate(" + x(new Date('1965')) + "," + 0 +
+            ")")
+        .attr("r", 5)
+        .append("svg:title")
+        .text(
+            '1965: Immigration Nationality Act allows visas based on skill and family'
+        );
 
-		browser.append("circle")
-			.attr('fill', color('Western Asia'))
-			.attr("transform", "translate(" + x(new Date('1979')) + "," + 0 + ")")
-			.attr("r", 5)
-			.append("svg:title")
-			.text('1978-1979: Iranian revolution sparks mass exodus');
+    browser.append("circle")
+        .attr('fill', color('Latin America'))
+        .attr("transform", "translate(" + x(new Date('1970')) + "," + 0 +
+            ")")
+        .attr("r", 5)
+        .append("svg:title")
+        .text('1970-1973: US sponsored coup in Chile');
 
-		browser.append("circle")
-			.attr('fill', color('Mexico'))
-			.attr("transform", "translate(" + x(new Date('1977')) + "," + 0 + ")")
-			.attr("r", 5)
-			.append("svg:title")
-			.text('1976: First Mexican peso crisis');
+    browser.append("circle")
+        .attr('fill', color('Latin America'))
+        .attr("transform", "translate(" + x(new Date('1976')) + "," + 0 +
+            ")")
+        .attr("r", 5)
+        .append("svg:title")
+        .text('1976: US sponsored coup in Argentina');
 
-		browser.append("circle")
-			.attr('fill', color('Latin America'))
-			.attr("transform", "translate(" + x(new Date('1981')) + "," + 0 + ")")
-			.attr("r", 5)
-			.append("svg:title")
-			.text('1981-1990: US sponsored coup in Nicaragua (Iran-Contra)');
+    browser.append("circle")
+        .attr('fill', color('Western Asia'))
+        .attr("transform", "translate(" + x(new Date('1979')) + "," + 0 +
+            ")")
+        .attr("r", 5)
+        .append("svg:title")
+        .text('1978-1979: Iranian revolution sparks mass exodus');
 
-		browser.append("circle")
-			.attr('fill', color('Mexico'))
-			.attr("transform", "translate(" + x(new Date('1994')) + "," + 0 + ")")
-			.attr("r", 5)
-			.append("svg:title")
-			.text('1994: NAFTA passes, Mexican goods production declines');
+    browser.append("circle")
+        .attr('fill', color('Mexico'))
+        .attr("transform", "translate(" + x(new Date('1977')) + "," + 0 +
+            ")")
+        .attr("r", 5)
+        .append("svg:title")
+        .text('1976: First Mexican peso crisis');
+
+    browser.append("circle")
+        .attr('fill', color('Latin America'))
+        .attr("transform", "translate(" + x(new Date('1981')) + "," + 0 +
+            ")")
+        .attr("r", 5)
+        .append("svg:title")
+        .text('1981-1990: US sponsored coup in Nicaragua (Iran-Contra)');
+
+    browser.append("circle")
+        .attr('fill', color('Mexico'))
+        .attr("transform", "translate(" + x(new Date('1994')) + "," + 0 +
+            ")")
+        .attr("r", 5)
+        .append("svg:title")
+        .text('1994: NAFTA passes, Mexican goods production declines');
 });
 
 
 var tip = d3.tip()
-  .attr('class', 'd3-tip')
-  .offset([0, 0])
-  .html(function(d) {
-    return d.data.region + ": <span style='color:orangered'>" + d.data[slider_year] +"%" + "</span>";
-  });
+    .attr('class', 'd3-tip')
+    .offset([0, 0])
+    .html(function(d) {
+        return d.data.region + ": <span style='color:orangered'>" + d.data[
+            slider_year] + "%" + "</span>";
+    });
 
 svg3.call(tip);
 
-function draw_pie(){
-	//clear image so we can redraw
-	//http://stackoverflow.com/questions/10784018/how-can-i-remove-or-replace-svg-content
-	svg3.selectAll("*").remove();		
+function draw_pie() {
+    //clear image so we can redraw
+    //http://stackoverflow.com/questions/10784018/how-can-i-remove-or-replace-svg-content
+    svg3.selectAll("*")
+        .remove();
 
-	var pie = d3.layout.pie()
+    var pie = d3.layout.pie()
         .sort(null)
-        .value(function(d) { return d[slider_year]; });
+        .value(function(d) {
+            return d[slider_year];
+        });
 
-	d3.csv("transposed_immigration.csv", function(error, data) {
-		//pie chart
-		var radius = height / 2;
-		var arc = d3.svg.arc()
-			.outerRadius(radius)
-			.innerRadius(0);
+    d3.csv("transposed_immigration.csv", function(error, data) {
+        //pie chart
+        var radius = height / 2;
+        var arc = d3.svg.arc()
+            .outerRadius(radius)
+            .innerRadius(0);
 
+        // Pie chart animation: http://bl.ocks.org/mbostock/4341574
         function tweenPie(b) {
-          b.innerRadius = 0;
-          var i = d3.interpolate({startAngle: 0, endAngle: 0}, b);
-          return function(t) { return arc(i(t)); };
+            b.innerRadius = 0;
+            var i = d3.interpolate({
+                startAngle: 0,
+                endAngle: 0
+            }, b);
+            return function(t) {
+                return arc(i(t));
+            };
         }
-		
-		var g = svg3.selectAll(".arc")
-			.data(pie(data))
-			.enter()
-			.append("g")
-            .attr("class", "arc");
 
-		g.append("text");
+        var g = svg3.selectAll(".arc")
+            .data(pie(data))
+            .enter()
+            .append("g");
 
-		g.append("path")
-            .on('mouseover', function(d) { 
+        g.append("text");
+
+        g.append("path")
+            .on('mouseover', function(d) {
                 tip.show(d);
                 d3.select(this)
-                    .style("opacity", .5);})
-            .on('mouseout', function(d){
+                    .style("opacity", .5);
+            })
+            .on('mouseout', function(d) {
                 tip.hide(d);
                 d3.select(this)
-                    .style("opacity", 1
-                          )})
-            .attr("fill", function(d) { return color(d.data.region); })
+                    .style("opacity", 1)
+            })
+            .attr("fill", function(d) {
+                return color(d.data.region);
+            })
             .transition()
             .ease("spring")
             .duration(1000)
             .attrTween("d", tweenPie);
-	});
+    });
 }
 
 //begin slider block
@@ -347,13 +385,17 @@ svg2.append("g")
     .attr("class", "x axis")
     .attr("transform", "translate(0," + 10 + ")")
     .call(d3.svg.axis()
-      .scale(slider_x)
-      .orient("bottom")
-      .tickFormat(function(d) { return ''; })
-      .tickSize(0)
-      .tickPadding(12))
-  .select(".domain")
-  .select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
+        .scale(slider_x)
+        .orient("bottom")
+        .tickFormat(function(d) {
+            return '';
+        })
+        .tickSize(0)
+        .tickPadding(12))
+    .select(".domain")
+    .select(function() {
+        return this.parentNode.appendChild(this.cloneNode(true));
+    })
     .attr("class", "halo");
 
 var slider = svg2.append("g")
@@ -378,21 +420,21 @@ slider.call(brush.event)
     .call(brush.event);
 
 
-function get_nearest_date(string){
-	//Why JS and d3 wouldn't use the same date format is beyond me
-	//So let's convert a date string into millis back into a js Date type...
-	var js_date = Date.parse(string);
-	var years = 1000 * 60 * 60 * 24 * 365;
-	var rounded_time = Math.round(js_date / years);
-	//time is relative to epoch, let's change that
-	rounded_time += 1970
-	//drop the ones place
-	rounded_time = Math.round(rounded_time / 10) * 10
-	if(rounded_time > 2010)
-		rounded_time = 2010
-	else if(rounded_time < 1850)
-		rounded_time = 1850
-	return rounded_time;
+function get_nearest_date(string) {
+    //Why JS and d3 wouldn't use the same date format is beyond me
+    //So let's convert a date string into millis back into a js Date type...
+    var js_date = Date.parse(string);
+    var years = 1000 * 60 * 60 * 24 * 365;
+    var rounded_time = Math.round(js_date / years);
+    //time is relative to epoch, let's change that
+    rounded_time += 1970
+        //drop the ones place
+    rounded_time = Math.round(rounded_time / 10) * 10
+    if (rounded_time > 2010)
+        rounded_time = 2010
+    else if (rounded_time < 1850)
+        rounded_time = 1850
+    return rounded_time;
 }
 
 function brushed() {
@@ -404,12 +446,11 @@ function brushed() {
         }
 
         handle.attr("cx", x(value));
-			tmp = get_nearest_date(value);
-			if(tmp !== slider_year){
-				slider_year = get_nearest_date(value);
-				draw_pie();
-			}
+        tmp = get_nearest_date(value);
+        if (tmp !== slider_year) {
+            slider_year = get_nearest_date(value);
+            draw_pie();
+        }
         //d3.select("body").style("background-color", d3.hsl(value, .8, .8));
     }
     //end slider block
-
