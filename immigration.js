@@ -353,7 +353,7 @@ function draw_pie() {
             .on('mouseover', function(d) {
                 tip.show(d);
                 d3.select(this)
-                    .style("opacity", .5);
+                    .style("opacity", 0.75);
             })
             .on('mouseout', function(d) {
                 tip.hide(d);
