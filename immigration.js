@@ -416,7 +416,7 @@ var handle = slider.append("circle")
 slider.call(brush.event)
     .transition() // gratuitous intro!
     .duration(0)
-    .call(brush.extent([1970, 1970]))
+    .call(brush.extent([2010, 2010]))
     .call(brush.event);
 
 
