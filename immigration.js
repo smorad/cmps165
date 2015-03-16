@@ -305,7 +305,7 @@ var tip = d3.tip()
     .attr('class', 'd3-tip')
     .offset([0, 0])
     .html(function(d) {
-        return d.data.region + ": <span style='color:orangered'>" + d.data[
+        return d.data.region + ": <span style='color:" + color(d.data.region) + "'>" + d.data[
             slider_year] + "%" + "</span>";
     });
 
