@@ -382,8 +382,8 @@ var brush = d3.svg.brush()
     .on("brush", brushed);
 
 svg2.append("g")
-    .attr("class", "x axis")
     .attr("transform", "translate(0," + 10 + ")")
+	.attr("stroke", "#ddd")
     .call(d3.svg.axis()
         .scale(slider_x)
         .orient("bottom")
