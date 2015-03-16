@@ -74,8 +74,7 @@ var svg3 = d3.select("#chart3")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
-    .attr("transform", "translate(" + width / 3 + "," + height / 2 + ")");
-
+    .attr("transform", "translate(" + width / 3 + "," + height / 1.5 + ")");
 
 
 d3.csv("immigration.csv", function(error, data) {
@@ -133,9 +132,7 @@ d3.csv("immigration.csv", function(error, data) {
                 .y0 + d.value.y / 2) + ")";
         })
         .attr("x", -6)
-        .attr("dy", ".35em")
-        //.text(function(d) { return d.name; });
-
+        .attr("dy", ".35em");
 
     browser.append('circle')
         .attr('cx', width + 205)
@@ -177,12 +174,6 @@ d3.csv("immigration.csv", function(error, data) {
         .style("text-anchor", "middle")
         .text("Percentage of Immigrants");
 
-    //tooltips
-    //		var paths = svg.selectAll("path");
-    //		var l = path.getTotalLength();
-    //		function get_yval(x){
-    //			return path.getPointAtLength(x * l);
-    //		}
     browser.append("circle")
         .attr('fill', 'black')
         .attr("transform", "translate(" + x(new Date('1930')) + "," + 0 +
@@ -317,6 +308,19 @@ function draw_pie() {
     svg3.selectAll("*")
         .remove();
 
+    var descriptionText = slider_year + " Immigration Background"; // pie chart description
+
+    //Pie Chart Title with changing year
+    svg3.append("text")
+        .attr("x", 0)             
+        .attr("y", -230)
+        .attr("text-anchor", "middle")
+        .style("fill", "#009")
+        .style("font-family", "Verdana,Helvetica,Arial,sans-serif")
+        .style("font-size", "110%")
+        .style("font-weigth", "bold")
+        .text(descriptionText);
+
     var pie = d3.layout.pie()
         .sort(null)
         .value(function(d) {
@@ -346,8 +350,6 @@ function draw_pie() {
             .data(pie(data))
             .enter()
             .append("g");
-
-        g.append("text");
 
         g.append("path")
             .on('mouseover', function(d) {
@@ -415,8 +417,8 @@ var handle = slider.append("circle")
 
 slider.call(brush.event)
     .transition() // gratuitous intro!
-    .duration(0)
-    .call(brush.extent([2010, 2010]))
+    .duration(500)
+    .call(brush.extent([1970, 1970]))
     .call(brush.event);
 
 
@@ -427,13 +429,13 @@ function get_nearest_date(string) {
     var years = 1000 * 60 * 60 * 24 * 365;
     var rounded_time = Math.round(js_date / years);
     //time is relative to epoch, let's change that
-    rounded_time += 1970
+    rounded_time += 1970;
         //drop the ones place
-    rounded_time = Math.round(rounded_time / 10) * 10
+    rounded_time = Math.round(rounded_time / 10) * 10;
     if (rounded_time > 2010)
-        rounded_time = 2010
+        rounded_time = 2010;
     else if (rounded_time < 1850)
-        rounded_time = 1850
+        rounded_time = 1850;
     return rounded_time;
 }
 
@@ -451,6 +453,5 @@ function brushed() {
             slider_year = get_nearest_date(value);
             draw_pie();
         }
-        //d3.select("body").style("background-color", d3.hsl(value, .8, .8));
     }
     //end slider block
