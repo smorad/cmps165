@@ -173,120 +173,133 @@ d3.csv("immigration.csv", function(error, data) {
         .attr("dy", ".1em")
         .style("text-anchor", "middle")
         .text("Percentage of Immigrants");
-
-    browser.append("circle")
-        .attr('fill', 'black')
+    
+    browser.append('rect')
+        .style('fill', 'black')
         .attr("transform", "translate(" + x(new Date('1930')) + "," + 0 +
             ")")
-        .attr("r", 5)
+        .attr('width', 10)
+        .attr('height', 10)
         .append("svg:title")
         .text(
             '1930: The Great Depression causes downturn in immigration'
         );
 
-    browser.append("circle")
+    browser.append("rect")
         .attr('fill', color('Eastern Asia'))
         .attr("transform", "translate(" + x(new Date('1859')) + "," + 0 +
             ")")
-        .attr("r", 5)
+        .attr('width', 10)
+        .attr('height', 10)
         .append("svg:title")
         .text(
             '1859: California passes law that bans all immigration from China'
         );
 
-    browser.append("circle")
+    browser.append("rect")
         .attr('fill', color('Europe'))
-        .attr("transform", "translate(" + x(new Date('1855')) + "," + 0 +
+        .attr("transform", "translate(" + x(new Date('1840')) + "," + 0 +
             ")")
-        .attr("r", 5)
+        .attr('width', 10)
+        .attr('height', 10)
         .append("svg:title")
         .text('1840-1860: Irish potato famine, many flee Ireland');
 
-    browser.append("circle")
+    browser.append("rect")
         .attr('fill', color('Eastern Asia'))
-        .attr("transform", "translate(" + x(new Date('1859')) + "," + 0 +
+        .attr("transform", "translate(" + x(new Date('1882')) + "," + 0 +
             ")")
-        .attr("r", 5)
+        .attr('width', 10)
+        .attr('height', 10)
         .append("svg:title")
         .text(
             '1882: Chinese Exclusion Act bans all immigration from China into California'
         );
 
-    browser.append("circle")
+    browser.append("rect")
         .attr('fill', color('Mexico'))
         .attr("transform", "translate(" + x(new Date('1910')) + "," + 0 +
             ")")
-        .attr("r", 5)
+        .attr('width', 10)
+        .attr('height', 10)
         .append("svg:title")
         .text(
             '1910-1917: Mexican revolution causes refugees to flee to the US'
         );
 
-    browser.append("circle")
+    browser.append("rect")
         .attr('fill', color('Eastern Asia'))
         .attr("transform", "translate(" + x(new Date('1943')) + "," + 0 +
             ")")
-        .attr("r", 5)
+        .attr('width', 10)
+        .attr('height', 10)
         .append("svg:title")
         .text(
             '1943: US and China ally against Japan during WWII, Chinese Exclusion Act repealed'
         );
 
-    browser.append("circle")
+    browser.append("rect")
         .attr('fill', 'black')
         .attr("transform", "translate(" + x(new Date('1965')) + "," + 0 +
             ")")
-        .attr("r", 5)
+        .attr('width', 10)
+        .attr('height', 10)
         .append("svg:title")
         .text(
             '1965: Immigration Nationality Act allows visas based on skill and family'
         );
 
-    browser.append("circle")
+    browser.append("rect")
         .attr('fill', color('Latin America'))
         .attr("transform", "translate(" + x(new Date('1970')) + "," + 0 +
             ")")
-        .attr("r", 5)
+        .attr('width', 10)
+        .attr('height', 10)
         .append("svg:title")
         .text('1970-1973: US sponsored coup in Chile');
 
-    browser.append("circle")
+    browser.append("rect")
         .attr('fill', color('Latin America'))
         .attr("transform", "translate(" + x(new Date('1976')) + "," + 0 +
             ")")
-        .attr("r", 5)
+        .attr('width', 10)
+        .attr('height', 10)
         .append("svg:title")
         .text('1976: US sponsored coup in Argentina');
 
-    browser.append("circle")
+    browser.append("rect")
         .attr('fill', color('Western Asia'))
         .attr("transform", "translate(" + x(new Date('1979')) + "," + 0 +
             ")")
-        .attr("r", 5)
+        .attr('width', 10)
+        .attr('height', 10)
         .append("svg:title")
         .text('1978-1979: Iranian revolution sparks mass exodus');
 
-    browser.append("circle")
+    browser.append("rect")
         .attr('fill', color('Mexico'))
         .attr("transform", "translate(" + x(new Date('1977')) + "," + 0 +
             ")")
-        .attr("r", 5)
+        .attr('width', 10)
+        .attr('height', 10)
         .append("svg:title")
         .text('1976: First Mexican peso crisis');
 
-    browser.append("circle")
+    browser.append("rect")
         .attr('fill', color('Latin America'))
         .attr("transform", "translate(" + x(new Date('1981')) + "," + 0 +
             ")")
-        .attr("r", 5)
+        .attr('width', 10)
+        .attr('height', 10)
         .append("svg:title")
         .text('1981-1990: US sponsored coup in Nicaragua (Iran-Contra)');
 
-    browser.append("circle")
+    browser.append("rect")
         .attr('fill', color('Mexico'))
         .attr("transform", "translate(" + x(new Date('1994')) + "," + 0 +
             ")")
-        .attr("r", 5)
+        .attr('width', 10)
+        .attr('height', 10)
         .append("svg:title")
         .text('1994: NAFTA passes, Mexican goods production declines');
 });
@@ -296,8 +309,7 @@ var tip = d3.tip()
     .attr('class', 'd3-tip')
     .offset([0, 0])
     .html(function(d) {
-        return d.data.region + ": <span style='color:" + color(d.data.region) + "'>" + d.data[
-            slider_year] + "%" + "</span>";
+        return "<span style='font-weight:bold'>" + d.data.region + ": </span>" + d.data[slider_year] + "%";
     });
 
 svg3.call(tip);
