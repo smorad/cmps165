@@ -1,0 +1,6 @@
+- changed css formating for tooltip background color
+- changed css formatting for tooltip text color
+- added a shadow to the text for tooltip so text stands out
+- changed timeline events to squares instead of circles
+- fixed date for 1882 timeline event
+- fixed date for 1840 timeline event, but now it shows on the edge of y-axis, do we want this??
