@@ -118,7 +118,8 @@ d3.csv("immigration.csv", function(error, data) {
         })
         .style("fill", function(d) {
             return color(d.name);
-        });
+        })
+        .attr("id", function(d, i) { return "path-" + i; });;
 
     // legend text
     browser.append("text")
@@ -130,9 +131,19 @@ d3.csv("immigration.csv", function(error, data) {
         .attr("transform", function(d) {
             return "translate(" + x(d.value.year) + "," + y(d.value
                 .y0 + d.value.y / 2) + ")"; })
-        .attr("x", 140)
-        .attr("dy", ".35em")
-        .text(function(d) { return d.name; });;
+        .attr("x", 18)
+        .attr("y", 4)
+        .attr("font-size", ".5em")
+        .style("text-anchor","start") 
+        .text(function(d) { return d.name; })
+        .on('mouseover', function(d, i) {
+                d3.select('#path-' + i)
+                .style("opacity", 0.75);
+            })
+        .on('mouseout', function(d, i) {
+                d3.select('#path-' + i)
+                .style("opacity", 1);
+            });
 
     // legend colors/squares
     browser.append('rect')
@@ -150,7 +161,15 @@ d3.csv("immigration.csv", function(error, data) {
         .attr('height', 10)
         .style('fill', function(d) {
             return color(d.name);
-        });
+        })
+        .on('mouseover', function(d, i) {
+                d3.select('#path-' + i)
+                .style("opacity", 0.75);
+            })
+        .on('mouseout', function(d, i) {
+                d3.select('#path-' + i)
+                .style("opacity", 1);
+            });
 
     svg.append("g")
         .attr("class", "x axis")
@@ -363,15 +382,19 @@ function draw_pie() {
             .append("g");
 
         g.append("path")
-            .on('mouseover', function(d) {
+            .on('mouseover', function(d, i) {
                 tip.show(d);
                 d3.select(this)
                     .style("opacity", 0.75);
+                d3.select('#path-' + i)
+                .style("opacity", 0.75);
             })
-            .on('mouseout', function(d) {
+            .on('mouseout', function(d, i) {
                 tip.hide(d);
                 d3.select(this)
-                    .style("opacity", 1)
+                    .style("opacity", 1);
+                d3.select('#path-' + i)
+                .style("opacity", 1);
             })
             .attr("fill", function(d) {
                 return color(d.data.region);
