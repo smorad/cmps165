@@ -119,7 +119,7 @@ d3.csv("immigration.csv", function(error, data) {
         .style("fill", function(d) {
             return color(d.name);
         })
-        .attr("id", function(d, i) { return "path-" + i; });;
+        .attr("id", function(d, i) { return "path-" + i; });
 
     // legend text
     browser.append("text")
@@ -138,11 +138,14 @@ d3.csv("immigration.csv", function(error, data) {
         .text(function(d) { return d.name; })
         .on('mouseover', function(d, i) {
                 d3.select('#path-' + i)
-                .style("opacity", 0.75);
+                    .style("opacity", 0.75)
+                    .attr("stroke", "black")
+                    .attr("stroke-width", 1);
             })
         .on('mouseout', function(d, i) {
                 d3.select('#path-' + i)
-                .style("opacity", 1);
+                    .style("opacity", 1)
+                    .attr("stroke", "none");
             });
 
     // legend colors/squares
@@ -164,11 +167,14 @@ d3.csv("immigration.csv", function(error, data) {
         })
         .on('mouseover', function(d, i) {
                 d3.select('#path-' + i)
-                .style("opacity", 0.75);
+                    .style("opacity", 0.75)
+                    .attr("stroke", "black")
+                    .attr("stroke-width", 1);
             })
         .on('mouseout', function(d, i) {
                 d3.select('#path-' + i)
-                .style("opacity", 1);
+                    .style("opacity", 1)
+                    .attr("stroke", "none");
             });
 
     svg.append("g")
@@ -387,14 +393,17 @@ function draw_pie() {
                 d3.select(this)
                     .style("opacity", 0.75);
                 d3.select('#path-' + i)
-                .style("opacity", 0.75);
+                    .style("opacity", 0.75)
+                    .attr("stroke", "black")
+                    .attr("stroke-width", 1);
             })
             .on('mouseout', function(d, i) {
                 tip.hide(d);
                 d3.select(this)
                     .style("opacity", 1);
                 d3.select('#path-' + i)
-                .style("opacity", 1);
+                    .style("opacity", 1)
+                    .attr("stroke", "none");
             })
             .attr("fill", function(d) {
                 return color(d.data.region);
