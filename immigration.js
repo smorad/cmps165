@@ -197,6 +197,15 @@ d3.csv("immigration.csv", function(error, data) {
         .attr("dy", ".1em")
         .style("text-anchor", "middle")
         .text("Percentage of Immigrants");
+
+	browser.append('text')
+		.attr("transform", 'translate(' + width + ',' + 30 + ')')
+		.attr('width', 30)
+		.attr('height', 10)
+        .style("fill", "#009")
+        .style("font-family", "Verdana,Helvetica,Arial,sans-serif")
+        .style("font-size", "110%")
+		.text('Event Timeline');
     
     browser.append('rect')
         .style('fill', 'black')
