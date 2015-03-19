@@ -204,13 +204,11 @@ d3.csv("immigration.csv", function(error, data) {
         .text("Percentage of Immigrants");
 
     browser.append('text')
-        .attr("transform", 'translate(' + width + ',' + 12 + ')')
-        .attr('width', 30)
-        .attr('height', 10)
+        .attr("transform", 'translate(' + (width+5) + ',' + 11 + ')')
         .style("text-anchor", "start")
         .style("fill", "#009")
-        .style("font-family", "Verdana,Helvetica,Arial,sans-serif")
-        .style("font-size", "110%")
+        .style("font-family", "Arial")
+        .style("font-size", "80%")
         .text('Event Timeline');
     
     browser.append('rect')
