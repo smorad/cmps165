@@ -111,6 +111,11 @@ d3.csv("immigration.csv", function(error, data) {
         .append("g")
         .attr("class", "browser");
 
+    browser.append('line')
+        .attr("class", "slide")
+        .attr("stroke", "black")
+        .attr("stroke-width", 1);
+
     browser.append("path")
         .attr("class", "area")
         .attr("d", function(d) {
@@ -502,6 +507,11 @@ function brushed() {
         }
 
         handle.attr("cx", x(value));
+        d3.select('.slide')
+            .attr("x1", x(value))
+            .attr("x2", x(value))
+            .attr("y1", 0)
+            .attr("y2", height);
         tmp = get_nearest_date(value);
         if (tmp !== slider_year) {
             slider_year = get_nearest_date(value);
