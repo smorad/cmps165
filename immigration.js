@@ -373,6 +373,15 @@ function draw_pie() {
         .style("font-weigth", "bold")
         .text(descriptionText);
 
+    svg3.append("text")
+        .attr("class", "hstnote")
+        .attr("x", 0)             
+        .attr("y", 230)
+        .attr("text-anchor", "middle")
+        .style("fill", "#009")
+        .style("font-family", "Arial")
+        .style("font-size", "65%");
+
     var pie = d3.layout.pie()
         .sort(null)
         .value(function(d) {
@@ -517,5 +526,60 @@ function brushed() {
             slider_year = get_nearest_date(value);
             draw_pie();
         }
+
+        // Check each event and show history note
+        if (tmp == 1850) {
+            d3.select('.hstnote')
+                .text('1840-1860: Irish potato famine, many flee Ireland');
+        }
+        if (tmp == 1860) {
+            d3.select('.hstnote')
+                .text('1859: California passes law that bans all immigration from China');
+        }
+        if (tmp == 1880) {
+            d3.select('.hstnote')
+                .text('1882: Chinese Exclusion Act bans all immigration from China into California');
+        }
+        if (tmp == 1910) {
+            d3.select('.hstnote')
+                .text('1910-1917: Mexican revolution causes refugees to flee to the US');
+        }
+        if (tmp == 1930) {
+            d3.select('.hstnote')
+                .text('1930: The Great Depression causes downturn in immigration');
+        }
+        if ((x(value)>348.73)&&(x(value)<358.73)) {
+            d3.select('.hstnote')
+                .text('1943: US and China ally against Japan during WWII, Chinese Exclusion Act repealed');
+        }
+        if ((x(value)>431.24)&&(x(value)<441.24)) {
+            d3.select('.hstnote')
+                .text('1965: Immigration Nationality Act allows visas based on skill and family');
+        }
+        if ((x(value)>449.99)&&(x(value)<459.99)) {
+            d3.select('.hstnote')
+                .text('1970-1973: US sponsored coup in Chile');
+        }
+        if ((x(value)>472.48)&&(x(value)<474.48)) {
+            d3.select('.hstnote')
+                .text('1976: US sponsored coup in Argentina');
+        }
+        if ((x(value)>476.25)&&(x(value)<486.24)) {
+            d3.select('.hstnote')
+                .text('1976: First Mexican peso crisis');
+        }
+        if ((x(value)>485.74)&&(x(value)<487.74)) {
+            d3.select('.hstnote')
+                .text('1978-1979: Iranian revolution sparks mass exodus');
+        }
+        if ((x(value)>491.25)&&(x(value)<501.24)) {
+            d3.select('.hstnote')
+                .text('1981-1990: US sponsored coup in Nicaragua (Iran-Contra)');
+        }
+        if ((x(value)>540)&&(x(value)<550)) {
+            d3.select('.hstnote')
+                .text('1994: NAFTA passes, Mexican goods production declines');
+        }
+
     }
     //end slider block
