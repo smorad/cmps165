@@ -210,7 +210,7 @@ d3.csv("immigration.csv", function(error, data) {
         .style("font-family", "Arial")
         .style("font-size", "80%")
         .text('Event Timeline');
-    
+    //Significant immigration events
     browser.append('rect')
         .style('fill', 'black')
         .attr("transform", "translate(" + x(new Date('1930')) + "," + 0 +
@@ -512,7 +512,7 @@ function brushed() {
             value = x.invert(d3.mouse(this)[0]);
             brush.extent([value, value]);
         }
-
+//updates info on piechart
         handle.attr("cx", x(value));
         d3.select('.slide')
             .attr("x1", x(value))
