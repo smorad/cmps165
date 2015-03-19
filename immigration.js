@@ -198,14 +198,15 @@ d3.csv("immigration.csv", function(error, data) {
         .style("text-anchor", "middle")
         .text("Percentage of Immigrants");
 
-	browser.append('text')
-		.attr("transform", 'translate(' + width + ',' + 30 + ')')
-		.attr('width', 30)
-		.attr('height', 10)
+    browser.append('text')
+        .attr("transform", 'translate(' + width + ',' + 12 + ')')
+        .attr('width', 30)
+        .attr('height', 10)
+        .style("text-anchor", "start")
         .style("fill", "#009")
         .style("font-family", "Verdana,Helvetica,Arial,sans-serif")
         .style("font-size", "110%")
-		.text('Event Timeline');
+        .text('Event Timeline');
     
     browser.append('rect')
         .style('fill', 'black')
@@ -342,7 +343,8 @@ var tip = d3.tip()
     .attr('class', 'd3-tip')
     .offset([0, 0])
     .html(function(d) {
-        return "<span style='font-weight:bold'>" + d.data.region + ": </span>" + d.data[slider_year] + "%";
+        return "<span style='font-weight:bold'>" + d.data.region 
+            + ": </span>" + d.data[slider_year] + "%";
     });
 
 svg3.call(tip);
@@ -437,7 +439,7 @@ var brush = d3.svg.brush()
 
 svg2.append("g")
     .attr("transform", "translate(0," + 10 + ")")
-	.attr("stroke", "#ddd")
+    .attr("stroke", "#ddd")
     .call(d3.svg.axis()
         .scale(slider_x)
         .orient("bottom")
